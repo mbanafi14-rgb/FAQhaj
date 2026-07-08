@@ -1,54 +1,52 @@
-const SHEET_URL =
-"https://docs.google.com/spreadsheets/d/e/2PACX-1vR4xbvFae0JUJwFxuTWfEsf4H-zn6gnLzBDQlUoeix1o-LdD6owHkhea0ZLgHPJbF9PIJJzfMNRzpte/pub?gid=0&single=true&output=csv";
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR4xbvFae0JUJwFxuTWfEsf4H-zn6gnLzBDQlUoeix1o-LdD6owHkhea0ZLgHPJbF9PIJJzfMNRzpte/pub?gid=0&single=true&output=csv";
 
 const faq = document.getElementById("faq");
 
-Papa.parse(SHEET_URL, {
+Papa.parse(SHEET_URL,{
+    download:true,
+    header:true,
 
-download:true,
+    complete:function(results){
 
-header:true,
+        faq.innerHTML="";
 
-complete:function(results){
+        results.data.forEach(item=>{
 
-faq.innerHTML="";
+            if(item.show !== "" && item.show.toLowerCase()=="no")
+                return;
 
-results.data.forEach(item=>{
+            faq.innerHTML += `
+            <div class="card">
 
-faq.innerHTML += `
+                <div class="question">
 
-<div class="card">
+                    ${item.Q_ar}
 
-<div class="question">
+                    <span>+</span>
 
-${item.Question_AR}
+                </div>
 
-<span>+</span>
+                <div class="answer">
 
-</div>
+                    ${item.an_ar}
 
-<div class="answer">
+                </div>
 
-${item.Answer_AR}
+            </div>
+            `;
 
-</div>
+        });
 
-</div>
+        document.querySelectorAll(".question").forEach(question=>{
 
-`;
+            question.addEventListener("click",()=>{
 
-});
+                question.parentElement.classList.toggle("active");
 
-document.querySelectorAll(".question").forEach(q=>{
+            });
 
-q.onclick=()=>{
+        });
 
-q.parentElement.classList.toggle("active");
-
-}
-
-});
-
-}
+    }
 
 });
