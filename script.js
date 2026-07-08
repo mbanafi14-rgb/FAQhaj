@@ -1,77 +1,134 @@
-const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR4xbvFae0JUJwFxuTWfEsf4H-zn6gnLzBDQlUoeix1o-LdD6owHkhea0ZLgHPJbF9PIJJzfMNRzpte/pub?gid=0&single=true&output=csv";
+const SHEET_URL =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vR4xbvFae0JUJwFxuTWfEsf4H-zn6gnLzBDQlUoeix1o-LdD6owHkhea0ZLgHPJbF9PIJJzfMNRzpte/pub?gid=0&single=true&output=csv";
 
 const faq = document.getElementById("faq");
-
+const categories = document.getElementById("categories");
 const search = document.getElementById("search");
 
-Papa.parse(SHEET_URL,{
-    download:true,
-    header:true,
+let allQuestions = [];
 
-    complete:function(results){
+Papa.parse(SHEET_URL, {
+    download: true,
+    header: true,
+    complete: function(results) {
 
-        faq.innerHTML="";
+        allQuestions = results.data.filter(r => r.Q_ar);
 
-        results.data.forEach(item=>{
+        renderFAQ(allQuestions);
+        buildCategories();
+    }
+});
 
-            if(item.show !== "" && item.show.toLowerCase()=="no")
-                return;
+function renderFAQ(data){
 
-            faq.innerHTML += `
-            <div class="card">
+    faq.innerHTML="";
 
-                <div class="question">
+    data.forEach(item=>{
 
-                    ${item.Q_ar}
+        if(item.show &&
+           item.show.toLowerCase()=="no")
+           return;
 
-                    <span>+</span>
+        faq.innerHTML += `
+        <div class="card" data-category="${item.cat_ar}">
 
-                </div>
+            <div class="question">
 
-                <div class="answer">
+                ${item.Q_ar}
 
-                    ${item.an_ar}
-
-                </div>
+                <span>+</span>
 
             </div>
-            `;
 
-        });
+            <div class="answer">
 
-        document.querySelectorAll(".question").forEach(question=>{
+                ${item.an_ar}
 
-            question.addEventListener("click",()=>{
+            </div>
 
-                question.parentElement.classList.toggle("active");
+        </div>
+        `;
 
-            });
+    });
 
-        });
+    document.querySelectorAll(".question").forEach(q=>{
 
-enableSearch();
-        
-    }
+        q.onclick=()=>{
 
-});
-function enableSearch() {
+            q.parentElement.classList.toggle("active");
 
-    search.addEventListener("keyup", function () {
-
-        const value = this.value.toLowerCase();
-
-        document.querySelectorAll(".card").forEach(card => {
-
-            const text = card.innerText.toLowerCase();
-
-            if (text.includes(value)) {
-                card.style.display = "";
-            } else {
-                card.style.display = "none";
-            }
-
-        });
+        }
 
     });
 
 }
+
+function buildCategories(){
+
+    const unique=[...new Set(allQuestions.map(x=>x.cat_ar).filter(Boolean))];
+
+    categories.innerHTML='<button class="cat active">الكل</button>';
+
+    unique.forEach(cat=>{
+
+        categories.innerHTML +=
+        `<button class="cat">${cat}</button>`;
+
+    });
+
+    document.querySelectorAll(".cat").forEach(btn=>{
+
+        btn.onclick=function(){
+
+            document.querySelectorAll(".cat")
+            .forEach(x=>x.classList.remove("active"));
+
+            this.classList.add("active");
+
+            const selected=this.innerText;
+
+            if(selected=="الكل"){
+
+                renderFAQ(allQuestions);
+
+            }
+
+            else{
+
+                renderFAQ(
+                    allQuestions.filter(
+                        x=>x.cat_ar==selected
+                    )
+                );
+
+            }
+
+        }
+
+    });
+
+}
+
+search.addEventListener("keyup",()=>{
+
+    const value=search.value.toLowerCase();
+
+    renderFAQ(
+
+        allQuestions.filter(item=>{
+
+            return(
+
+                item.Q_ar.toLowerCase().includes(value)||
+
+                item.an_ar.toLowerCase().includes(value)||
+
+                item.keywords.toLowerCase().includes(value)
+
+            );
+
+        })
+
+    );
+
+});
