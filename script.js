@@ -7,6 +7,8 @@ const search = document.getElementById("search");
 
 let allQuestions = [];
 
+let currentLang = "ar";
+
 Papa.parse(SHEET_URL, {
     download: true,
     header: true,
