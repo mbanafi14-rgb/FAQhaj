@@ -44,7 +44,7 @@ function renderFAQ(data){
 
             <div class="answer">
 
-                ${item.an_ar}
+                ${currentLang === "ar" ? item.an_ar : item.an_en}
 
             </div>
 
@@ -132,5 +132,30 @@ search.addEventListener("keyup",()=>{
         })
 
     );
+
+});
+document.getElementById("arBtn").addEventListener("click", () => {
+
+    currentLang = "ar";
+
+    document.documentElement.lang = "ar";
+    document.documentElement.dir = "rtl";
+
+    search.placeholder = "ابحث عن سؤال...";
+
+    renderFAQ(allQuestions);
+
+});
+
+document.getElementById("enBtn").addEventListener("click", () => {
+
+    currentLang = "en";
+
+    document.documentElement.lang = "en";
+    document.documentElement.dir = "ltr";
+
+    search.placeholder = "Search...";
+
+    renderFAQ(allQuestions);
 
 });
