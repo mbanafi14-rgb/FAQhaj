@@ -2,6 +2,8 @@ const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR4xbvFae0JUJ
 
 const faq = document.getElementById("faq");
 
+const search = document.getElementById("search");
+
 Papa.parse(SHEET_URL,{
     download:true,
     header:true,
@@ -47,6 +49,29 @@ Papa.parse(SHEET_URL,{
 
         });
 
+enableSearch();
+        
     }
 
 });
+function enableSearch() {
+
+    search.addEventListener("keyup", function () {
+
+        const value = this.value.toLowerCase();
+
+        document.querySelectorAll(".card").forEach(card => {
+
+            const text = card.innerText.toLowerCase();
+
+            if (text.includes(value)) {
+                card.style.display = "";
+            } else {
+                card.style.display = "none";
+            }
+
+        });
+
+    });
+
+}
