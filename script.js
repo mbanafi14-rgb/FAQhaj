@@ -36,7 +36,7 @@ function renderFAQ(data){
 
             <div class="question">
 
-                ${item.Q_ar}
+            ${currentLang === "ar" ? item.Q_ar : item.Q_en}
 
                 <span>+</span>
 
