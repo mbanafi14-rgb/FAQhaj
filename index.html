@@ -1,81 +1,53 @@
-index.html
-style.css
-script.js
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FAQHAJJ</title>
 
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FAQHAJJ</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
 
 <header>
 
-<div class="logo">
+<div class="container">
 
 <h1>FAQHAJJ</h1>
 
-<p>Hajj & Umrah Knowledge Center</p>
+<p>مركز المعرفة للحج والعمرة</p>
 
-</div>
-
-<div class="language">
-
-<button id="arBtn">العربية</button>
-
-<button id="enBtn">English</button>
+<input
+type="text"
+id="search"
+placeholder="ابحث عن سؤال...">
 
 </div>
 
 </header>
 
+<nav id="categories"></nav>
 
-<section class="hero">
-
-<h2 id="title">
-
-ابحث عن أي سؤال
-
-</h2>
-
-<input
-type="text"
-id="search"
-placeholder="اكتب سؤالك هنا...">
-
-</section>
-
-
-<section id="categories">
-
-</section>
-
-
-<section id="faq">
-
-</section>
-
+<main id="faq"></main>
 
 <footer>
 
-<p>
-
 © FAQHAJJ
-
-</p>
 
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
 <script src="script.js"></script>
 
 </body>
+
 </html>
