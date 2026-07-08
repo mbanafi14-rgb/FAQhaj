@@ -134,6 +134,7 @@ search.addEventListener("keyup",()=>{
     );
 
 });
+
 document.getElementById("arBtn").addEventListener("click", () => {
 
     currentLang = "ar";
