@@ -3,38 +3,32 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 body {
     font-family: "Cairo", sans-serif;
     background: #f8fafc;
     color: #1f2937;
     line-height: 1.8;
 }
-
 .container {
     max-width: 1100px;
     margin: auto;
     padding: 25px;
 }
-
 header {
     background: linear-gradient(135deg,#0f766e,#14b8a6);
     color: white;
     text-align: center;
     padding: 60px 20px;
 }
-
 header h1 {
     font-size: 48px;
     margin-bottom: 10px;
 }
-
 header p {
     opacity: .95;
     margin-bottom: 25px;
     font-size: 18px;
 }
-
 #search {
     width: 100%;
     max-width: 700px;
@@ -44,7 +38,6 @@ header p {
     font-size: 18px;
     outline: none;
 }
-
 #categories{
     display:flex;
     gap:12px;
@@ -53,7 +46,6 @@ header p {
     margin:35px auto;
     padding:0 20px;
 }
-
 .category{
     background:white;
     border-radius:30px;
@@ -62,18 +54,15 @@ header p {
     box-shadow:0 3px 10px rgba(0,0,0,.08);
     transition:.25s;
 }
-
 .category:hover{
     background:#0f766e;
     color:white;
 }
-
 #faq{
     max-width:900px;
     margin:auto;
     padding:20px;
 }
-
 .card{
     background:white;
     margin-bottom:18px;
@@ -81,7 +70,6 @@ header p {
     overflow:hidden;
     box-shadow:0 5px 18px rgba(0,0,0,.08);
 }
-
 .question{
     padding:20px;
     font-size:18px;
@@ -91,39 +79,28 @@ header p {
     justify-content:space-between;
     align-items:center;
 }
-
 .answer{
     display:none;
     padding:20px;
     border-top:1px solid #eee;
     background:#fafafa;
 }
-
 .card.active .answer{
     display:block;
 }
-
 footer{
     text-align:center;
     margin-top:60px;
     padding:30px;
     color:#666;
 }
-
-@media(max-width:768px){
-
-header h1{
-font-size:34px;
+.logo-bar {
+  text-align: center;
+  margin-bottom: 15px;
 }
-
-.question{
-font-size:16px;
-}
-
-#search{
-font-size:16px;
-}
-
+.site-logo {
+  max-width: 130px;
+  height: auto;
 }
 .top-bar{
 display:flex;
@@ -131,8 +108,8 @@ justify-content:space-between;
 align-items:center;
 gap:20px;
 flex-wrap:wrap;
+text-align: right;
 }
-
 .lang-switch button{
 padding:10px 18px;
 border:none;
@@ -143,35 +120,25 @@ font-family:Cairo;
 font-weight:bold;
 margin-right:5px;
 }
-
 .lang-switch button:hover{
 background:#0f766e;
 color:white;
 }
-
 @media(max-width:768px){
+header h1{
+font-size:34px;
+}
+.question{
+font-size:16px;
+}
+#search{
+font-size:16px;
+}
+.site-logo {
+  max-width: 90px;
+}
 .top-bar{
 flex-direction:column;
 text-align:center;
 }
 }
-.logo-bar {
-  text-align: center;
-  padding: 10px 0;
-}
-
-.site-logo {
-  max-width: 220px;
-  height: auto;
-}
-.title-with-logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.site-logo {
-  max-width: 300px;
-  height: auto;
-}
-
