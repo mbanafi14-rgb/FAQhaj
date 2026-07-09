@@ -155,3 +155,12 @@ flex-direction:column;
 text-align:center;
 }
 }
+.logo-bar {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.site-logo {
+  max-width: 220px;
+  height: auto;
+}
